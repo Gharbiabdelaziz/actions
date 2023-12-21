@@ -3,11 +3,26 @@ name: second workflow
 on: push
 # on: [push, fork]
 jobs:
-    first_job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: using checkout action
-              uses: actions/checkout@v4
-            - name: using script shell file
-              run: |
-                sh ./script.sh
+    build_job:
+      runs-on: ubuntu-latest
+      steps:
+          - name: using checkout action
+            uses: actions/checkout@v4
+          - name: using script shell file
+            run: |
+              sh ./script.sh
+    test_job:
+      runs-on: ubuntu-latest
+      steps:
+        - name: sleep 10
+          run: sleep 10
+        - name: test
+          run: grep -i "dragon" hello
+    
+    deploy_job:
+      runs-on: ubuntu-latest
+      steps:
+        - name: create file
+          run: echo "hello world" >world.txt
+        - name: deployment
+          run: echo deploy ...........................
