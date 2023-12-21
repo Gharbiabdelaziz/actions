@@ -8,6 +8,10 @@ jobs:
         steps:
             - name: using checkout action
               uses: actions/checkout@v4
+            - name: working directory
+              run: pwd
+            - name: nbre proc
+              run: nproc
             - name: first github action
               run: echo "this is my first github action"
             
