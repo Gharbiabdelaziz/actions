@@ -8,12 +8,14 @@ jobs:
         steps:
             - name: using checkout action
               uses: actions/checkout@v4
-            - name: working directory
-              run: pwd
             - name: cmd series
               run: |
                 pwd
+                echo -----------------------------------------------
                 nproc
+                echo -----------------------------------------------
                 echo "this is my first github action" >hello.txt
-                ls -lrta
+                echo -----------------------------------------------
+                ls -lta
+                echo -----------------------------------------------
                 cat README.md
