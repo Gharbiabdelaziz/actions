@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: using checkout action
         uses: actions/checkout@v4
-      - name: working directory
+      - name: cmd series
         run: |
           pwd
           nproc
