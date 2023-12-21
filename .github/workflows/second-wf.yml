@@ -8,13 +8,15 @@ jobs:
       steps:
           - name: using checkout action
             uses: actions/checkout@v4
-          - name: using script shell file
+
+          - name: create file
             run: |
-              sh ./script.sh
-          - name: download artifact
+              echo "this is my first dragon action" | tee dragon.txt
+
+          - name: upload artifact
             uses: actions/upload-artifact@v4
             with:
-              name: download dragon file
+              name: upload dragon file
               path: dragon.txt
 
     test_job:
