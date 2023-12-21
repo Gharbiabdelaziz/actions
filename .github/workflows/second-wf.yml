@@ -31,7 +31,7 @@ jobs:
             # Name of the artifact to upload.
             name: upload-dragon-file
             # A file, directory or wildcard pattern that describes what to upload required.
-            path: dragon.txt
+            # path: dragon.txt
 
         - name: test
           run: grep -i "dragon" upload-dragon-file
@@ -46,7 +46,7 @@ jobs:
             # Name of the artifact to upload.
             name: upload-dragon-file
             # A file, directory or wildcard pattern that describes what to upload required.
-            path: bear.txt
+            # path: bear.txt
         - name: read file
-          run: head bear.txt
+          run: head dragon.txt
         
