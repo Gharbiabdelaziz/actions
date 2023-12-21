@@ -64,11 +64,9 @@ jobs:
             - name: using checkout action
               uses: actions/checkout@v4
 
-            - name: working directory
+            - name: list and read files
               run: |
-                pwd
-                nproc
-                echo "this is my first github action" >hello.txt
-                ls -lrta
-                cat README.md 
+                echo "this is my first github action" | tee hello
+                ls -lta
+                head -n 10 hello
 ```
