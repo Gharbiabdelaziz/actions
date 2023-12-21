@@ -8,11 +8,6 @@ jobs:
         steps:
             - name: using checkout action
               uses: actions/checkout@v4
-            - name: list and read files
+            - name: using script shell file
               run: |
-                echo "this is my first github action" | tee hello
-                ls -lta
-                sudo apt-get install -y cowsay
-                cowsay -f dragon "hello cover me" >>hello
-                cat hello
-# install third party soft if dont exist like cowsay
+                sh ./script.sh
