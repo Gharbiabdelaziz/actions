@@ -12,7 +12,7 @@ jobs:
               run: |
                 echo "this is my first github action" | tee hello
                 ls -lta
-                apt install -y cowsay
+                sudo apt-get install -y cowsay
                 cowsay -f dragon "hello cover me" >>hello
                 cat hello
 # install third party soft if dont exist like cowsay
