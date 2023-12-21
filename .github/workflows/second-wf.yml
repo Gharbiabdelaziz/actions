@@ -34,7 +34,7 @@ jobs:
             path: dragon.txt
 
         - name: test
-          run: grep -i "dragon" dragon.txt
+          run: grep -i "dragon" upload-dragon-file
     
     deploy_job:
       needs: test_job
