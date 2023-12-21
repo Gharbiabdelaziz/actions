@@ -1,4 +1,4 @@
-name: myfirst workflow
+name: second workflow
 
 on: push
 # on: [push, fork]
