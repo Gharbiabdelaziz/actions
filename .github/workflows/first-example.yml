@@ -8,14 +8,8 @@ jobs:
         steps:
             - name: using checkout action
               uses: actions/checkout@v4
-            - name: cmd series
+            - name: list and read files
               run: |
-                pwd
-                echo -----------------------------------------------
-                nproc
-                echo -----------------------------------------------
-                echo "this is my first github action" >hello.txt
-                echo -----------------------------------------------
+                echo "this is my first github action" | tee hello
                 ls -lta
-                echo -----------------------------------------------
-                cat README.md
+                head -n 10 README.md
