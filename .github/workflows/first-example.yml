@@ -1,0 +1,16 @@
+name: myfirst workflow
+
+on: push
+# on: [push, fork]
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: first github action
+              run: echo "this is my first github action"
+            
+            - name: list folder
+              run: ls 
+
+            - name: cat file
+              run: cat README.md
