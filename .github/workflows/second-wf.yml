@@ -11,18 +11,38 @@ jobs:
           - name: using script shell file
             run: |
               sh ./script.sh
+          - name: download artifact
+            uses: actions/upload-artifact@v4
+            with:
+              name: download dragon file
+              path: dragon.txt
+
     test_job:
+      needs: build_job
       runs-on: ubuntu-latest
       steps:
-        - name: sleep 10
-          run: sleep 10
+        - name: download artifact
+          uses: actions/download-artifact@v4
+          with:
+            # Name of the artifact to upload.
+            name: download dragon file
+            # A file, directory or wildcard pattern that describes what to upload required.
+            path: dragon.txt
+
         - name: test
-          run: grep -i "dragon" hello
+          run: grep -i "dragon" dragon.txt
     
     deploy_job:
+      needs: test_job
       runs-on: ubuntu-latest
       steps:
-        - name: create file
-          run: echo "hello world" >world.txt
-        - name: deployment
-          run: echo deploy ...........................
+        - name: download artifact
+          uses: actions/download-artifact@v4
+          with:
+            # Name of the artifact to upload.
+            name: download dragon file
+            # A file, directory or wildcard pattern that describes what to upload required.
+            path: dragon.txt
+        - name: read file
+          run: head dragon.txt
+        
