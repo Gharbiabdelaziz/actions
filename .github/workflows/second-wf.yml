@@ -32,9 +32,11 @@ jobs:
             name: upload-dragon-file
             # A file, directory or wildcard pattern that describes what to upload required.
             # path: dragon.txt
+        - name: list
+          run: ls -latr
 
         - name: test
-          run: grep -i "dragon" upload-dragon-file
+          run: grep -i "dragon" dragon.txt
     
     deploy_job:
       needs: test_job
@@ -47,6 +49,7 @@ jobs:
             name: upload-dragon-file
             # A file, directory or wildcard pattern that describes what to upload required.
             # path: bear.txt
+            
         - name: read file
           run: head dragon.txt
         
