@@ -11,7 +11,11 @@ on: push
 jobs:
     build_job:
       runs-on: ubuntu-latest
+      # env var at job level example docker_user not used in this examle
+      env: 
+        docker_user: aziz
       steps:
+        - env: 
         - name: build
           run: echo docker build -t ${{env.DOCKER_REGISTRY}}/${{env.DOCKER_USERNAME}}/$IMAGE_NAME:latest
         
@@ -19,7 +23,7 @@ jobs:
           env:
             # env var at steps level example DOCKER_PASSWORD
             DOCKER_PASSWORD: aa.bb.cc.dd
-          run: echo docker login --username ${{env.DOCKER_USERNAME}} --password $DOCKER_PASSWORD
+          run: echo docker login --username=${{env.DOCKER_USERNAME}} --password=$DOCKER_PASSWORD
         
         - name: publish
           run: echo docker push ${{env.DOCKER_REGISTRY}}/${{env.DOCKER_USERNAME}}/$IMAGE_NAME:latest
