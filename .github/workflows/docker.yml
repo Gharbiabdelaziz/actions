@@ -16,7 +16,7 @@ jobs:
         docker_user: aziz
       steps:
         - name: build
-          run: echo docker build -t ${{vars.DOCKER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.IMAGE_NAME}}:latest
+          run: echo docker build -t ${{vars.DOCKER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/$vars.IMAGE_NAME:latest
         
         - name: login
           run: echo docker login --username=${{vars.DOCKER_USERNAME}} --password=${{secrets.DOCKER_PASSWORD}}
