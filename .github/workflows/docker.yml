@@ -15,7 +15,6 @@ jobs:
       env: 
         docker_user: aziz
       steps:
-        - env: 
         - name: build
           run: echo docker build -t ${{env.DOCKER_REGISTRY}}/${{env.DOCKER_USERNAME}}/$IMAGE_NAME:latest
         
