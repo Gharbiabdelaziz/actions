@@ -1,4 +1,4 @@
-name: second workflow
+name: docker workflow
 # env var at workflow level example DOCKER_REGISTRY, DOCKER_USERNAME, IMAGE_NAME
 
 env: 
