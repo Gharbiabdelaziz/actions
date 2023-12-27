@@ -4,7 +4,7 @@ jobs:
   deploy_on:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, ubuntu-20-04]
+        os: [ubuntu-latest, windows-latest, ubuntu-20.04]
         image: [hello-world, alpine]
         exclude:
           - os: windows-latest
@@ -12,8 +12,8 @@ jobs:
         include:
           - os: ubuntu-latest
           - image: amd64/alpine
-    runs-on: ${{matrix.os}}
-
+    # runs-on: ${{matrix.os}}
+    runs-on: ub
     steps:
       - name: run image on ${{matrix.os}}
         run: docker run ${{matrix.image}}
