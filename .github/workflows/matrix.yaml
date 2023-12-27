@@ -1,7 +1,7 @@
-name: deploy ${{matrix.image}} on ${{matrix.os}}
+name: using matrices
 on: push
 jobs:
-  run_as_matrix:
+  deploy_on:
     strategy:
       matrix:
         version: [latest]
