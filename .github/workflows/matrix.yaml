@@ -12,8 +12,7 @@ jobs:
         include:
           - os: ubuntu-latest
           - image: amd64/alpine
-    # runs-on: ${{matrix.os}}
-    runs-on: ub
+    runs-on: ${{matrix.os}}
     steps:
       - name: run image on ${{matrix.os}}
         run: docker run ${{matrix.image}}
