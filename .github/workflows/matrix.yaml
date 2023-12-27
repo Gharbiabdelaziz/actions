@@ -4,11 +4,14 @@ jobs:
   deploy_on:
     strategy:
       matrix:
-        version: [latest]
-        os: [ubuntu, windows]
+        # version: [latest]
+        # os: [ubuntu, windows]
+        
+        os: [ubuntu-latest, windows-latest]
         image: [hello-world, alpine]
+    runs-on: ${{matrix.os}}
     
-    runs-on: ${{matrix.os}}-${{matrix.version}}
+    # runs-on: ${{matrix.os}}-${{matrix.version}}
 
     steps:
       - name: run image on ${{matrix.os}}
