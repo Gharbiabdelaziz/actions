@@ -1,4 +1,4 @@
-name: matrix deploy
+name: deploy ${{matrix.image}} on ${{matrix.os}}
 on: push
 jobs:
   run_as_matrix:
@@ -7,10 +7,13 @@ jobs:
         version: [latest]
         os: [ubuntu, windows]
         image: [hello-world, nginx]
+    
     runs-on: ${{matrix.os}}-${{matrix.version}}
+
     steps:
-      - name: run image
+      - name: run image on ${{matrix.os}}
         run: docker run ${{matrix.image}}
+
       - name: list container
         run: docker ps -l
   
