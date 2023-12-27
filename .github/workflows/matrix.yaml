@@ -6,7 +6,7 @@ jobs:
       matrix:
         version: [latest]
         os: [ubuntu, windows]
-        image: [hello-wold, nginx]
+        image: [hello-world, nginx]
     runs-on: ${{matrix.os}}-${{matrix.version}}
     steps:
       - name: run image
