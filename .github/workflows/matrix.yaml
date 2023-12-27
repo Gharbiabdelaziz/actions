@@ -5,15 +5,14 @@ on: push
 jobs:
   deploy_on:
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
-        image: [hello-world, alpine, amd64/alpine]
-    
+        image: [hello-world, alpine]
         exclude:
         - os: windows-latest
           image: alpine
-        
         include:
         - os: ubuntu-20.04
           image: amd64/alpine
@@ -21,6 +20,5 @@ jobs:
     steps:
       - name: run image on ${{ matrix.os }}
         run: docker run ${{ matrix.image }}
-
       - name: list container
         run: docker ps -l
