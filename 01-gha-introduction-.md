@@ -187,6 +187,61 @@ jobs:
         - name: deployment
           run: echo deploy ...........................
 ```
-```yaml
+## use actions/download-artifact@v4 -- actions/upload-artifact@v4 :
+In GitHub Actions, the use of actions/download-artifact@v4 and actions/upload-artifact@v4 between jobs is a way to share data or artifacts produced by one job with another job in the same workflow. This is particularly useful when you have multiple jobs that need access to the same set of files or information.
 
+the actions/download-artifact@v4 action is employed to retrieve the artifacts (previously uploaded in Job A) and make them available to the subsequent job for further processing or deployment.
+```yaml
+name: second workflow
+
+on: push
+# on: [push, fork]
+jobs:
+    build_job:
+      runs-on: ubuntu-latest
+      steps:
+          - name: using checkout action
+            uses: actions/checkout@v4
+
+          - name: create file
+            run: |
+              echo "this is my first dragon action" | tee dragon.txt
+
+          - name: upload artifact
+            uses: actions/upload-artifact@v4
+            with:
+              # Name of the artifact to upload.
+              name: dragon-file
+              # A file, directory or wildcard pattern that describes what to upload required.
+              path: dragon.txt
+
+    test_job:
+      needs: build_job
+      runs-on: ubuntu-latest
+      steps:
+        - name: download artifact
+          uses: actions/download-artifact@v4
+          with:
+            # Name of the artifact to upload.
+            name: dragon-file
+            # A file, directory or wildcard pattern that describes what to upload required.
+            
+        - name: test
+          run: grep -i "dragon" dragon.txt
+    
+    deploy_job:
+      needs: test_job
+      runs-on: ubuntu-latest
+      steps:
+        - name: download artifact
+          uses: actions/download-artifact@v4
+          with:
+            # Name of the artifact to upload.
+            name: dragon-file
+            # A file, directory or wildcard pattern that describes what to upload required.
+
+        - name: read file
+          run: head dragon.txt
+        
 ```
+During the program's execution, artifacts are generated in the form of a zip file (dragon-file), encapsulating processed data from earlier stages.
