@@ -6,7 +6,7 @@ jobs:
       matrix:
         version: [latest]
         os: [ubuntu, windows]
-        image: [hello-world, nginx]
+        image: [hello-world, alpine]
     
     runs-on: ${{matrix.os}}-${{matrix.version}}
 
