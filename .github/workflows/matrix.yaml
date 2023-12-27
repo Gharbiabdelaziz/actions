@@ -1,17 +1,18 @@
-name: using matrices
+name: using matrices include/exclude
 on: push
 jobs:
   deploy_on:
     strategy:
       matrix:
-        # version: [latest]
-        # os: [ubuntu, windows]
-        
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, ubuntu-20-04]
         image: [hello-world, alpine]
+        exclude:
+          - os: windows-latest
+          - image: alpine
+        include:
+          - os: ubuntu-latest
+          - image: amd64/alpine
     runs-on: ${{matrix.os}}
-    
-    # runs-on: ${{matrix.os}}-${{matrix.version}}
 
     steps:
       - name: run image on ${{matrix.os}}
