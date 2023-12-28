@@ -5,7 +5,6 @@ on: push
 jobs:
     build_job:
       runs-on: ubuntu-latest
-      # env var at job level example docker_user not used in this examle
       env: 
         docker_user: aziz
       steps:
