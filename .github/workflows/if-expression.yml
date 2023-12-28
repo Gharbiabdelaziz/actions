@@ -1,0 +1,27 @@
+name: if expression
+
+on: push
+
+jobs:
+    build_job:
+      runs-on: ubuntu-latest
+      # env var at job level example docker_user not used in this examle
+      env: 
+        docker_user: aziz
+      steps:
+        - name: build
+          run: echo docker build -t ${{vars.DOCKER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
+        
+        - name: login
+          run: echo docker login --username=${{vars.DOCKER_USERNAME}} --password=${{secrets.DOCKER_PASSWORD}}
+        
+        - name: publish
+          run: echo docker push ${{vars.DOCKER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.IMAGE_NAME}}:latest
+    
+    deploy_job:
+      if: github.ref == 'refs/heads/main'
+      runs-on: ubuntu-latest
+      needs: build_job
+      steps:
+        - name: run
+          run: echo docker run -d -p 82s:80 ${{vars.DOCKER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.IMAGE_NAME}}:latest
