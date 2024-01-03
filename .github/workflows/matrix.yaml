@@ -7,10 +7,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
-      fail-fast: false
+      -fast: false
       max-parallel: 2
       matrix:
-        # jobs are 06 in matrix add 01 to them one fails (alpine image on windows)
+        # jobs are 06 in matrix add 01 to them one s (alpine image on windows)
         # max executed 2 in parrallel
         os: [ubuntu-latest, ubuntu-20.04, windows-latest]
         image: [hello-world, alpine]

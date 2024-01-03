@@ -123,7 +123,7 @@ jobs:
 ```
 ## fail fast and max parallel
 
-1. **`fail-fast: false`**:
+1. **`-fast: false`**:
    - By default, the `fail-fast` strategy is set to `true`. When `fail-fast` is set to `true`, the job execution stops as soon as one of the parallel jobs fails. This is useful when you want to quickly identify and address issues in your CI/CD pipeline.
 
    - Setting `fail-fast` to `false` means that even if one parallel job fails, the other parallel jobs will continue to execute. This can be beneficial in scenarios where you want to collect results from multiple parallel processes, even if some of them encounter failures.
