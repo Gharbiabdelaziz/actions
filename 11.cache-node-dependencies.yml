@@ -1,0 +1,65 @@
+name: solar system
+
+on:
+    workflow_dispatch: 
+    push: 
+        branches: 
+            - 'main'
+            - 'feature/v1'
+env:
+    MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+    MONGO_USERNAME: ${{vars.MONGO_USERNAME}}
+    MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
+jobs:
+    unit-testing:
+        name: unit testing
+        strategy:
+          matrix:
+            nodejs_version: [18, 20]
+            os: [ubuntu-latest, macos-latest]
+        runs-on: ${{matrix.os}}
+        steps:
+            - name: checkout repository
+              uses: actions/checkout@v1
+            - name: setup node ${{matrix.nodejs_version}}
+              uses: actions/setup-node@v3
+              with:
+                node-version: ${{matrix.nodejs_version}}
+            - name: Cache node modules
+              id: cache-npm
+              uses: actions/cache@v3
+              env:
+                cache-name: cache-node-modules
+              with:
+                # npm cache files are stored in `~/.npm` on Linux/macOS
+                path: ~/.npm
+                key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                
+            - run: npm install
+            - run: npm test
+              id: run_test_on_nodejs
+            - name: upload artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: mocha-test-result
+                path: test-results.xml
+              if: always()
+    code_coverage:
+      name: code coverage
+      runs-on: ubuntu-latest
+      steps:
+          - name: checkout repository
+            uses: actions/checkout@v1
+          - name: setup node 18
+            uses: actions/setup-node@v3
+            with:
+              node-version: 18
+          - run: npm install
+          - run: npm run coverage
+            continue-on-error: true
+          - name: archive coverage
+            uses: actions/upload-artifact@v3
+            with:
+              name: code-coverage-archive
+              path: coverage
+              retention-days: 5
